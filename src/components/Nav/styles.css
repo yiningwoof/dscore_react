@@ -1,0 +1,38 @@
+.MuiAppBar-colorPrimary {
+	background-color: rgb(17, 17, 17) !important;
+	color: #fff;
+}
+
+.MuiToolbar-root.MuiToolbar-regular.MuiToolbar-gutters {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	overflow: hidden;
+}
+
+#nav__logo {
+	color: whitesmoke;
+	font-size: 1.8rem;
+}
+
+.nav__links {
+	justify-content: flex-end;
+	transition: all 0.3s ease-in-out;
+}
+
+.nav__link:hover {
+	text-shadow: 0 0 2.4rem rgba(245, 245, 245, 0.8);
+	transition: all 0.3s ease-in-out;
+}
+
+.nav__links .nav__link {
+	color: whitesmoke;
+	transition: all 0.3s;
+	padding: 0 0.8rem;
+	position: relative;
+	transition: all 0.3s ease-in-out;
+}
+
+.nav__links .nav__link span {
+	font-size: 1.4rem;
+}
