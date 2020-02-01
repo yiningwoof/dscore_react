@@ -26,7 +26,7 @@ export const Nav = ({ user, setUser }) => {
 				<Toolbar>
 					<Link to="/" className={'nav__link'}>
 						<Typography id={'nav__logo'} variant="h5" className={classes.title}>
-							Illuminight
+							Dscore
 						</Typography>
 					</Link>
 					<div className={'nav__links'}>

@@ -31,6 +31,17 @@ export const Home = () => {
 						scaledSize: new window.google.maps.Size(30, 30)
 					}}
 				></Marker>
+				<Marker
+					key={1}
+					position={{ lat: 30.418616, lng: -97.643808 }}
+					onClick={() => {
+						setSelectedHole(1);
+					}}
+					icon={{
+						url: '/15.png',
+						scaledSize: new window.google.maps.Size(30, 30)
+					}}
+				></Marker>
 				{selectedHole && (
 					<InfoWindow
 						position={{ lat: 30.419082, lng: -97.64282 }}
@@ -48,7 +59,7 @@ export const Home = () => {
 	const WrappedMap = withScriptjs(withGoogleMap(Map));
 
 	return (
-		<div style={{ width: '100vw', height: '100vh' }}>
+		<div style={{ width: '100vw', height: '90vh' }}>
 			{/* <h1>counter: {counter}</h1>
 			<button onClick={() => dispatch(increment())}>+</button>
 			<button onClick={() => dispatch(decrement())}>-</button>

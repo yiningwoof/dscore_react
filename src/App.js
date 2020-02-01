@@ -13,9 +13,10 @@ import './App.css';
 
 import { Nav } from './components/Nav/Nav';
 import { Home } from './components/Home/Home';
-import { SignIn } from './components/SignIn/SignIn';
+// import { SignIn } from './components/SignIn/SignIn';
 import { CurrentGame } from './components/CurrentGame/CurrentGame';
 import Leaderboard from './components/Leaderboard/Leaderboard';
+import { Registration } from './components/Registration/Registration';
 
 // STORE -> GLOBALIZED STATE
 // ACTION
@@ -41,9 +42,9 @@ function App() {
 						<Home />
 						{/* user={user} */}
 					</Route>
-					{/* <Route path="/signin"> */}
-					{/* {user.id ? <Redirect to="/" /> : <SignIn setUser={setUser} />} */}
-					{/* </Route> */}
+					<Route path="/registration">
+						{user.id ? <Redirect to="/" /> : <Registration setUser={setUser} />}
+					</Route>
 					{/* <Route path="/currentgame"> */}
 					{/* <CurrentGame /> */}
 					{/* </Route> */}
