@@ -36,7 +36,7 @@ export const SignUpForm = ({ errors, handleErrors, handleSubmit }) => (
       </span>
       <input
         className="input"
-        data_colname={"password_confirmation"}
+        data-colname={"password_confirmation"}
         type="password"
         placeholder="Confirm password"
       />
