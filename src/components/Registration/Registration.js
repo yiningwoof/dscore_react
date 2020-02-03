@@ -70,7 +70,7 @@ export class Registration extends Component {
 				},
 				{ withCredentials: true }
 			)
-			.then((res) => setUserState(res.data));
+			.then((res) => setUserState(res.data.user));
 		//   .then(user => setUserState(user)).then(() => {
 
 		//   });
@@ -127,7 +127,7 @@ export class Registration extends Component {
 
 		axios
 			.post(APIUrl, { user: userObject }, { withCredentials: true })
-			.then((res) => setUserState(res.data));
+			.then((res) => setUserState(res.data.user));
 	};
 
 	render() {

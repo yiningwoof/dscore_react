@@ -1,5 +1,3 @@
-// api_key:
-
 import React, { useState, useEffect } from 'react';
 import {
 	BrowserRouter as Router,
@@ -7,14 +5,13 @@ import {
 	Route,
 	Redirect
 } from 'react-router-dom';
-// import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 // import { increment } from './actions';
 import axios from 'axios';
 import './App.css';
 
 import { Nav } from './components/Nav/Nav';
 import { Home } from './components/Home/Home';
-// import { SignIn } from './components/SignIn/SignIn';
 import { CurrentGame } from './components/CurrentGame/CurrentGame';
 import Leaderboard from './components/Leaderboard/Leaderboard';
 import { Registration } from './components/Registration/Registration';
@@ -59,14 +56,14 @@ function App() {
 	useEffect(checkLoginStatus, []);
 
 	// const counter = useSelector((state) => state.counter);
-	// const isLogged = useSelector((state) => state.isLogged);
+	const isLogged = useSelector((state) => state.isLogged);
 
 	return (
 		<div>
 			{/* <h1>counter: {counter}</h1>
 			<button onClick={() => dispatch(increment())}>+</button>
-			<button onClick={() => dispatch(decrement())}>-</button>
-			{isLogged ? <h3>you are logged in </h3> : <h3>have to log in to see</h3>} */}
+			<button onClick={() => dispatch(decrement())}>-</button> */}
+			{isLogged ? <h3>you are logged in </h3> : <h3>have to log in to see</h3>}
 			<Router>
 				<Nav
 					user={user}

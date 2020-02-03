@@ -21,7 +21,7 @@ export const Home = () => {
 				defaultOptions={{ styles: mapStyles }}
 			>
 				<Marker
-					key={1}
+					key={Math.random()}
 					position={{ lat: 30.419082, lng: -97.64282 }}
 					onClick={() => {
 						setSelectedHole(1);
