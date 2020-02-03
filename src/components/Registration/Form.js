@@ -34,6 +34,12 @@ export const SignUpForm = ({ errors, handleErrors, handleSubmit }) => (
 			<span className={'error__container'}>
 				{/* {errors + " message goes here"} */}
 			</span>
+			<input
+				className="input"
+				data-colname={'password_confirmation'}
+				type="password"
+				placeholder="Confirm password"
+			/>
 			<button
 				onClick={(e) => {
 					e.preventDefault();
