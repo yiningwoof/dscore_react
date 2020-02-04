@@ -37,7 +37,7 @@ function App() {
 				if (res.data.logged_in && !user.id) {
 					//   console.log(res.data.user);
 					setUser(res.data.user);
-					console.log(res.data.user);
+					// console.log(res.data.user);
 				}
 				// } else if (!res.data.logged_in && user.id) {
 				// 	setUser({});

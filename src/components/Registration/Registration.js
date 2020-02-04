@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { SignUpForm, SignInForm } from './Form';
 import { SignInOverlay } from './Overlay';
-// import { handleUserFormSubmit } from '../../helpers';
+import { useDispatch } from 'react-redux';
+import { signIn } from '../../actions';
 import axios from 'axios';
 import './styles.css';
 // var cors = require("cors");
 // App.use(cors()); // Use this after the variable declaration
+const dispatch = useDispatch();
 
 export class Registration extends Component {
 	constructor(props) {
@@ -70,7 +72,8 @@ export class Registration extends Component {
 				},
 				{ withCredentials: true }
 			)
-			.then((res) => setUserState(res.data.user));
+			.then((res) => setUserState(res.data.user))
+			.then(dispatch(signIn()));
 		//   .then(user => setUserState(user)).then(() => {
 
 		//   });
@@ -127,7 +130,8 @@ export class Registration extends Component {
 
 		axios
 			.post(APIUrl, { user: userObject }, { withCredentials: true })
-			.then((res) => setUserState(res.data.user));
+			.then((res) => setUserState(res.data.user))
+			.then(dispatch(signIn()));
 	};
 
 	render() {

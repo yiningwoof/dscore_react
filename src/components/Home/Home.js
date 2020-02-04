@@ -15,55 +15,54 @@ export const Home = () => {
 		const [selectedHole, setSelectedHole] = useState(null);
 
 		return (
-			<GoogleMap
-				defaultZoom={17}
-				defaultCenter={{ lat: 30.419727, lng: -97.643586 }}
-				defaultOptions={{ styles: mapStyles }}
-			>
-				<Marker
-					key={Math.random()}
-					position={{ lat: 30.419082, lng: -97.64282 }}
-					onClick={() => {
-						setSelectedHole(1);
-					}}
-					icon={{
-						url: '/1.png',
-						scaledSize: new window.google.maps.Size(30, 30)
-					}}
-				></Marker>
-				<Marker
-					key={1}
-					position={{ lat: 30.418616, lng: -97.643808 }}
-					onClick={() => {
-						setSelectedHole(1);
-					}}
-					icon={{
-						url: '/15.png',
-						scaledSize: new window.google.maps.Size(30, 30)
-					}}
-				></Marker>
-				{selectedHole && (
-					<InfoWindow
+			<div>
+				<h1>hello</h1>
+				<GoogleMap
+					defaultZoom={17}
+					defaultCenter={{ lat: 30.419727, lng: -97.643586 }}
+					defaultOptions={{ styles: mapStyles }}
+				>
+					<Marker
+						key={Math.random()}
 						position={{ lat: 30.419082, lng: -97.64282 }}
-						onCloseClick={() => {
-							setSelectedHole(null);
+						onClick={() => {
+							setSelectedHole(1);
 						}}
-					>
-						<div>hole details</div>
-					</InfoWindow>
-				)}
-			</GoogleMap>
+						icon={{
+							url: '/1.png',
+							scaledSize: new window.google.maps.Size(30, 30)
+						}}
+					></Marker>
+					<Marker
+						key={1}
+						position={{ lat: 30.418616, lng: -97.643808 }}
+						onClick={() => {
+							setSelectedHole(1);
+						}}
+						icon={{
+							url: '/15.png',
+							scaledSize: new window.google.maps.Size(30, 30)
+						}}
+					></Marker>
+					{selectedHole && (
+						<InfoWindow
+							position={{ lat: 30.419082, lng: -97.64282 }}
+							onCloseClick={() => {
+								setSelectedHole(null);
+							}}
+						>
+							<div>hole details</div>
+						</InfoWindow>
+					)}
+				</GoogleMap>
+			</div>
 		);
 	}
 
 	const WrappedMap = withScriptjs(withGoogleMap(Map));
 
 	return (
-		<div style={{ width: '100vw', height: '90vh' }}>
-			{/* <h1>counter: {counter}</h1>
-			<button onClick={() => dispatch(increment())}>+</button>
-			<button onClick={() => dispatch(decrement())}>-</button>
-			{isLogged ? <h3>you are logged in </h3> : <h3>have to log in to see</h3>} */}
+		<div style={{ width: '100vw', height: '80vh' }}>
 			<WrappedMap
 				googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}
 				loadingElement={<div style={{ height: '100%' }} />}

@@ -6,7 +6,7 @@ import {
 	Redirect
 } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-// import { increment } from './actions';
+import { signOut } from './actions';
 import axios from 'axios';
 import './App.css';
 
@@ -23,6 +23,9 @@ import { Registration } from './components/Registration/Registration';
 
 function App() {
 	const [user, setUser] = useState({});
+	const isLogged = useSelector((state) => state.isLogged);
+	const dispatch = useDispatch();
+
 	const checkLoginStatus = () => {
 		axios
 			.get('http://localhost:3000/api/v1/logged_in', {
@@ -45,7 +48,9 @@ function App() {
 	};
 
 	const logout = async () => {
-		setUser({});
+		// setUser({});
+		dispatch(signOut());
+
 		axios
 			.delete('http://localhost:3000/api/v1/logout', { withCredentials: true })
 			.catch((error) => {
@@ -56,7 +61,6 @@ function App() {
 	useEffect(checkLoginStatus, []);
 
 	// const counter = useSelector((state) => state.counter);
-	const isLogged = useSelector((state) => state.isLogged);
 
 	return (
 		<div>
