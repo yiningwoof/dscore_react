@@ -42,3 +42,10 @@ export const getUser = () => (dispatch, getState) => {
 		});
 	// Functional React components should return either JSX or React.createComponent()
 };
+
+export const getPlayerNames = (playerNames) => {
+	return {
+		type: 'GET_PLAYERNAMES',
+		payload: playerNames
+	};
+};

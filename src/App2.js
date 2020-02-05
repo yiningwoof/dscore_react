@@ -5,6 +5,9 @@ import {
 	Route,
 	Redirect
 } from 'react-router-dom';
+
+import createHistory from 'history/createBrowserHistory';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { signIn, signOut, getUser } from './actions';
 import { connect } from 'react-redux';
@@ -25,12 +28,14 @@ import { NewGame } from './components/NewGame/NewGame';
 // REDUCER
 // DISPATCH
 
-function App() {
+function App(props) {
+	const history = createHistory();
 	const isLogged = useSelector((state) => state.isLogged);
 	const loggedUser = useSelector((state) => state.getUser);
+	const playerNames = useSelector((state) => state.getPlayerNames);
 	const dispatch = useDispatch();
 
-	console.log(loggedUser);
+	console.log(playerNames);
 
 	// const checkLoginStatus = () => {
 	// 	x;
@@ -59,13 +64,14 @@ function App() {
 
 	return (
 		<div>
-			<Router>
+			<Router history={history}>
 				<Nav
+					history={props.history}
 					logout={logout}
 					// getUserLoginStatus={getUserLoginStatus}
 				/>
-				<Switch>
-					<Route exact path="/">
+				<Switch history={props.history}>
+					<Route exact path="/" history={props.history}>
 						{loggedUser.user && loggedUser.user.firstname ? (
 							<h1>hello, {loggedUser.user.firstname}!</h1>
 						) : (
@@ -73,17 +79,17 @@ function App() {
 								<SignInButton>go sign up!</SignInButton>
 							</div>
 						)}
-						<Home />
+						<Home history={props.history} />
 					</Route>
-					<Route path="/registration">
+					<Route path="/registration" history={props.history}>
 						{loggedUser.user && loggedUser.user.id ? (
 							<Redirect to="/" />
 						) : (
-							<Registration />
+							<Registration history={props.history} />
 						)}
 					</Route>
-					<Route path="/new_game">
-						<NewGame />
+					<Route path="/new_game" history={props.history}>
+						<NewGame history={history} />
 					</Route>
 					{/* <Route path="/currentgame"> */}
 					{/* <CurrentGame /> */}
