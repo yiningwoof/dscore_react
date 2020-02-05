@@ -7,13 +7,13 @@ export const SignUpForm = ({ errors, handleErrors, handleSubmit }) => (
 			<input
 				className="input"
 				data-colname={'firstname'}
-				type="firstname"
+				type="text"
 				placeholder="First name"
 			/>
 			<input
 				className="input"
 				data-colname={'lastname'}
-				type="lastname"
+				type="text"
 				placeholder="Last name"
 			/>
 			<input

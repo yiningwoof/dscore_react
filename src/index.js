@@ -5,12 +5,19 @@ import App from './App2';
 import * as serviceWorker from './serviceWorker';
 import allReducers from './reducers';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 // connects store to entire app
+
+const initialState = {};
+const middleware = [thunk];
 
 const store = createStore(
 	allReducers,
-	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+	initialState,
+	applyMiddleware(...middleware)
+	// allReducers,
+	// window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 // ReactDOM.render(

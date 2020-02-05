@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import {
 	GoogleMap,
@@ -13,10 +14,10 @@ import mapStyles from './mapStyles';
 export const Home = () => {
 	function Map() {
 		const [selectedHole, setSelectedHole] = useState(null);
+		const loggedUser = useSelector((state) => state.getUser);
 
 		return (
 			<div>
-				<h1>hello</h1>
 				<GoogleMap
 					defaultZoom={17}
 					defaultCenter={{ lat: 30.419727, lng: -97.643586 }}
