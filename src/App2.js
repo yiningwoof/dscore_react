@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-	BrowserRouter as Router,
-	Switch,
-	Route,
-	Redirect
-} from 'react-router-dom';
-
-import createHistory from 'history/createBrowserHistory';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { signIn, signOut, getUser } from './actions';
@@ -28,8 +21,7 @@ import { NewGame } from './components/NewGame/NewGame';
 // REDUCER
 // DISPATCH
 
-function App(props) {
-	const history = createHistory();
+function App() {
 	const isLogged = useSelector((state) => state.isLogged);
 	const loggedUser = useSelector((state) => state.getUser);
 	const playerNames = useSelector((state) => state.getPlayerNames);
@@ -63,48 +55,45 @@ function App(props) {
 	// const counter = useSelector((state) => state.counter);
 
 	return (
-		<div>
-			<Router history={history}>
-				<Nav
-					history={props.history}
-					logout={logout}
-					// getUserLoginStatus={getUserLoginStatus}
-				/>
-				<Switch history={props.history}>
-					<Route exact path="/" history={props.history}>
-						{loggedUser.user && loggedUser.user.firstname ? (
-							<h1>hello, {loggedUser.user.firstname}!</h1>
-						) : (
-							<div>
-								<SignInButton>go sign up!</SignInButton>
-							</div>
-						)}
-						<Home history={props.history} />
-					</Route>
-					<Route path="/registration" history={props.history}>
-						{loggedUser.user && loggedUser.user.id ? (
-							<Redirect to="/" />
-						) : (
-							<Registration history={props.history} />
-						)}
-					</Route>
-					<Route path="/new_game" history={props.history}>
-						<NewGame history={history} />
-					</Route>
-					{/* <Route path="/currentgame"> */}
-					{/* <CurrentGame /> */}
-					{/* </Route> */}
-					{/* <Route path="/leaderboard"> */}
-					{/* <Leaderboard /> */}
-					{/* </Route> */}
-				</Switch>
-			</Router>
+		<>
+			<Nav
+				logout={logout}
+				// getUserLoginStatus={getUserLoginStatus}
+			/>
+			<Switch>
+				<Route exact path="/">
+					{loggedUser.user && loggedUser.user.firstname ? (
+						<h1>hello, {loggedUser.user.firstname}!</h1>
+					) : (
+						<div>
+							<SignInButton>go sign up!</SignInButton>
+						</div>
+					)}
+					<Home />
+				</Route>
+				<Route path="/registration">
+					{loggedUser.user && loggedUser.user.id ? (
+						<Redirect to="/" />
+					) : (
+						<Registration />
+					)}
+				</Route>
+				<Route path="/new_game">
+					<NewGame />
+				</Route>
+				{/* <Route path="/currentgame"> */}
+				{/* <CurrentGame /> */}
+				{/* </Route> */}
+				{/* <Route path="/leaderboard"> */}
+				{/* <Leaderboard /> */}
+				{/* </Route> */}
+			</Switch>
 			{/* <h1>counter: {counter}</h1>
       <button onClick={() => dispatch(increment())}>+</button>
       <button onClick={() => dispatch(decrement())}>-</button> */}
-		</div>
+		</>
 	);
 }
 
 // export default connect(null, { getUser })(App);
-export default App;
+export default withRouter(App);

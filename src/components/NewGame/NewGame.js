@@ -11,7 +11,9 @@ import MaterialUIForm from 'react-material-ui-form';
 
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getPlayerNames } from '../../actions';
+import { getUser, getPlayerNames } from '../../actions';
+
+import history from '../../history';
 
 const useStyles = makeStyles((theme) => ({
 	formControl: {
@@ -54,9 +56,10 @@ export const NewGame = (props) => {
 		// event.persist();
 		// console.log(textFieldRef);
 		// console.log(event);
-		console.log(playerNamesState);
+		// console.log(playerNamesState);
 		dispatch(getPlayerNames(playerNamesState));
-		props.history.push('/');
+		dispatch(getUser());
+		history.push('/' /*, pass state here */);
 	};
 
 	return (
@@ -113,7 +116,7 @@ export const NewGame = (props) => {
 								label={`player ${index + 1}`}
 								onChange={(e) => {
 									setPlayerNamesState({
-										...playerNames,
+										...playerNamesState,
 										[`player${index + 1}`]: e.target.value
 									});
 								}}
