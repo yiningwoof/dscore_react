@@ -3,7 +3,7 @@ const getPlayerNamesReducer = (state = {}, action) => {
 		case 'GET_PLAYERNAMES':
 			return action.payload;
 		default:
-			return {};
+			return state;
 	}
 };
 

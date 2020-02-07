@@ -32,8 +32,6 @@ function App() {
 				withCredentials: true
 			})
 			.then((res) => {
-				console.log('check log in?', res.data.logged_in);
-				// console.log(user);
 				if (res.data.logged_in && !user.id) {
 					//   console.log(res.data.user);
 					setUser(res.data.user);
