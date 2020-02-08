@@ -12,3 +12,13 @@ code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 		monospace;
 }
+
+form div {
+	display: flex;
+}
+
+.MuiTypography-h6 {
+	align-self: flex-end;
+	display: inline-block;
+	margin: 0 8px 0 0 !important;
+}
