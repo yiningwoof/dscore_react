@@ -13,14 +13,20 @@ import MaterialUIForm from "react-material-ui-form";
 
 // import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getGame } from "../../actions";
+import { getGame, getScores } from "../../actions";
 
 import history from "../../history";
 
 export const CurrentGame = () => {
-  const game = useSelector(state => state.getGame);
+  const dispatch = useDispatch();
 
-  useEffect(() => console.log(game), [game]);
+  const game = useSelector(state => state.getGame);
+  const rounds = useSelector(state => state.getRounds);
+
+  useEffect(() => {
+    console.log(game, rounds);
+    dispatch(getScores(rounds));
+  }, [game]);
 
   return (
     <div>

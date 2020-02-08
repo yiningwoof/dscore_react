@@ -134,5 +134,18 @@ export const postScores = (scores, holeId, rounds) => dispatch => {
       score: score
     });
   });
-  //   console.log(allUsersScores);
+};
+
+export const getScores = rounds => dispatch => {
+  let allUserScores = {};
+  rounds.forEach(round => {
+    axios
+      .get("http://localhost:3000/api/v1/scores")
+      .then(res => res.data)
+      .then(allScores => {
+        allScores.filter(score => score.round_id === round.round_id);
+        return allScores;
+      })
+      .then(console.log);
+  });
 };
