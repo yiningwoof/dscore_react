@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
-import { signOut, getUser, getHoles, getGame } from "./actions";
+import { signOut, getUser, getHoles, getGame, getGameData } from "./actions";
 // import { connect } from "react-redux";
 import axios from "axios";
 
@@ -35,6 +35,7 @@ function App() {
   useEffect(() => {
     dispatch(getUser());
     dispatch(getHoles());
+    dispatch(getGameData());
   }, [game]);
 
   return (
