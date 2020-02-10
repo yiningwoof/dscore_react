@@ -157,7 +157,6 @@ export const Home = () => {
               </div>
             </InfoWindow>
           ) : null}
-          )
         </GoogleMap>
       </div>
     );

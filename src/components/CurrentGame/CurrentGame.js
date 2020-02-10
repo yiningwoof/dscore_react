@@ -91,8 +91,8 @@ export const CurrentGame = () => {
   const setUpRows = () => {
     const rowData = Object.keys(scoreData).map(name => {
       let data = {};
-      data["name"] = name;
-      data["total"] = 0;
+      data["Name"] = name;
+      data["Total"] = 0;
       let holeNumbers = [...Array(18)].map((number, index) => index + 1);
       holeNumbers.forEach(number => {
         let total = 0;

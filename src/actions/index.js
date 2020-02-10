@@ -206,3 +206,21 @@ export const getScores = rounds => async dispatch => {
     payload: allUserScores
   });
 };
+
+export const getAllRounds = () => dispatch => {
+  axios.get("http://localhost:3000/api/v1/rounds").then(res => {
+    dispatch({
+      type: "GET_ALL_ROUNDS",
+      payload: res.data
+    });
+  });
+};
+
+export const getAllScores = () => dispatch => {
+  axios.get("http://localhost:3000/api/v1/scores").then(res => {
+    dispatch({
+      type: "GET_ALL_SCORES",
+      payload: res.data
+    });
+  });
+};

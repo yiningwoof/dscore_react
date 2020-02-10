@@ -2,7 +2,14 @@ import React, { useEffect } from "react";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
-import { signOut, getUser, getHoles, getGame, getGameData } from "./actions";
+import {
+  signOut,
+  getUser,
+  getHoles,
+  getGame,
+  getAllRounds,
+  getAllScores
+} from "./actions";
 // import { connect } from "react-redux";
 import axios from "axios";
 
@@ -16,6 +23,7 @@ import { Registration } from "./components/Registration/Registration";
 import { SignInButton } from "./components/SignInButton/SignInButton";
 import { NewGame } from "./components/NewGame/NewGame";
 import { CurrentGame } from "./components/CurrentGame/CurrentGame";
+import { Leaderboard } from "./components/Leaderboard/Leaderboard";
 
 // STORE -> GLOBALIZED STATE
 // ACTION
@@ -35,7 +43,8 @@ function App() {
   useEffect(() => {
     dispatch(getUser());
     dispatch(getHoles());
-    dispatch(getGameData());
+    dispatch(getAllRounds());
+    dispatch(getAllScores());
   }, [game]);
 
   return (
@@ -54,6 +63,9 @@ function App() {
         </Route>
         <Route path="/current_game">
           <CurrentGame />
+        </Route>
+        <Route path="/leaderboard">
+          <Leaderboard />
         </Route>
         <Route path="/registration">
           {loggedUser.user && loggedUser.user.id ? (
