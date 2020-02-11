@@ -217,7 +217,7 @@ export const getAllRounds = () => dispatch => {
 };
 
 export const getAllScores = () => dispatch => {
-  axios.get("http://localhost:3000/api/v1/scores").then(res => {
+  axios.get("http://localhost:3000/api/v1/scores/leaderboard").then(res => {
     dispatch({
       type: "GET_ALL_SCORES",
       payload: res.data

@@ -8,6 +8,7 @@ import getAllScoresReducer from "./getAllScores";
 import getGameDataReducer from "./getGameData";
 import getScoresFromResReducer from "./getScoresFromRes";
 import getAllRoundsReducer from "./getAllRounds";
+import updateHoleScoresReducer from "./updateHoleScores";
 import { combineReducers } from "redux";
 
 const allReducers = combineReducers({
@@ -20,7 +21,8 @@ const allReducers = combineReducers({
   getScores: getScoresReducer,
   getAllScores: getAllScoresReducer,
   getGameData: getGameDataReducer,
-  getScoresFromRes: getScoresFromResReducer
+  getScoresFromRes: getScoresFromResReducer,
+  updateHoleScores: updateHoleScoresReducer
 });
 
 export default allReducers;

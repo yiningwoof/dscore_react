@@ -42,6 +42,7 @@ export const Home = () => {
   const scores = useSelector(state => state.getScoresFromRes);
   const loggedUser = useSelector(state => state.getUser);
   const gameData = useSelector(state => state.getGameData);
+  const holeScores = useSelector(state => state.updateHoleScores);
 
   const [isInitialRender, setIsInitialRender] = useState(true);
 
@@ -51,14 +52,15 @@ export const Home = () => {
       dispatch(getGameData());
       setIsInitialRender(false);
     }
-  }, [game]);
+  }, []);
 
-  console.log("from home scores: ", scores);
+  //   console.log("from home hole scores: ", holeScores);
 
   // console.log(holes);
   const Map = () => {
     const [selectedHole, setSelectedHole] = useState(null);
     const [scoresState, setScoresState] = useState({});
+
     // let scores = gameData.data.scores;
     // let rounds = gameData.data.rounds;
 
@@ -66,46 +68,51 @@ export const Home = () => {
       if (Object.keys(playerNames).length === 0) {
         history.push("/new_game");
       } else {
+        dispatch({
+          type: "UPDATE_HOLE_SCORES",
+          payload: { [`${selectedHole.id}`]: scoresState }
+        });
         dispatch(postScores(scoresState, selectedHole.id, rounds));
       }
     };
 
     return (
       <div>
-        {console.log(scores.filter(score => score.hole_id == 1))}
+        {/* {console.log(
+          scores
+            .map(score => score.score)
+            .filter((v, i, a) => a.indexOf(v) === i)
+            .includes(holeData.id)
+        )} */}
+        {/* {console.log(scores.map(score => score.hole_id).uniq())} */}
         <GoogleMap
           defaultZoom={17}
           defaultCenter={{ lat: 30.419727, lng: -97.643586 }}
           defaultOptions={{ styles: mapStyles }}
         >
-          {holes.map(hole =>
-            hole.map(holeData => {
-              return (
-                <Marker
-                  key={holeData.id}
-                  position={{
-                    lat: parseFloat(`${holeData.lat}`),
-                    lng: parseFloat(`${holeData.lng}`)
-                  }}
-                  onClick={() => {
-                    setSelectedHole(holeData);
-                  }}
-                  icon={
-                    scores.filter(score => score.hole_id == `${holeData.id}`)
-                      .length > 0
-                      ? {
-                          url: "checkmark3.png",
-                          scaledSize: new window.google.maps.Size(30, 30)
-                        }
-                      : {
-                          url: `/${holeData.id}.png`,
-                          scaledSize: new window.google.maps.Size(30, 30)
-                        }
-                  }
-                ></Marker>
-              );
-            })
-          )}
+          {holes.map(hole => (
+            <Marker
+              key={hole.id}
+              position={{
+                lat: parseFloat(hole.lat),
+                lng: parseFloat(hole.lng)
+              }}
+              onClick={() => {
+                setSelectedHole(hole);
+              }}
+              icon={
+                scores.filter(score => score.hole_id == hole.id).length > 0
+                  ? {
+                      url: "checkmark3.png",
+                      scaledSize: new window.google.maps.Size(30, 30)
+                    }
+                  : {
+                      url: `/${hole.id}.png`,
+                      scaledSize: new window.google.maps.Size(30, 30)
+                    }
+              }
+            ></Marker>
+          ))}
           {selectedHole ? (
             <InfoWindow
               position={{
@@ -116,44 +123,62 @@ export const Home = () => {
                 setSelectedHole(null);
               }}
             >
-              <div>
+              <div class="p-4">
                 {/* <h3>{`Hole #${selectedHole.id}`}</h3> */}
                 <Typography variant="h4" gutterBottom>
                   {`Hole #${selectedHole.id}`}
                 </Typography>
+                <Typography variant="h6" gutterBottom>
+                  Par: {selectedHole.par}
+                </Typography>
+                <br />
                 <img
+                  className="rounded"
                   src={selectedHole.pic}
                   alt={selectedHole.id}
                   height="300px"
                   width="400px"
                 ></img>
-                <Typography variant="h5" gutterBottom>
-                  Par: {selectedHole.par}
-                </Typography>
-                <MaterialUIForm onSubmit={() => createScores(selectedHole)}>
-                  {rounds.map(round => (
-                    <div>
-                      <Typography variant="h6" gutterBottom>
-                        {`${round.data.name}`}:
-                      </Typography>
-                      <TextField
-                        required
-                        id="standard-required"
-                        label={"score"}
-                        onChange={e => {
-                          setScoresState({
-                            ...scoresState,
-                            [`${round.data.name}`]: e.target.value
-                          });
-                        }}
-                      />
-                    </div>
-                  ))}
-                  <br></br>
-                  <Button variant="contained" color="primary" type="submit">
-                    Log Score
-                  </Button>
-                </MaterialUIForm>
+                <br />
+
+                <hr className="mt-4 border-gray-400" />
+
+                {Object.keys(holeScores).includes(selectedHole.id + "") ? (
+                  <div class="flex flex-col items-center justify-center">
+                    {Object.keys(holeScores[selectedHole.id]).map(name => (
+                      <div>
+                        <Typography variant="h6" gutterButtom>
+                          {`${name}: ${holeScores[selectedHole.id][name]}`}
+                        </Typography>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <MaterialUIForm onSubmit={() => createScores(selectedHole)}>
+                    {rounds.map(round => (
+                      <div>
+                        <Typography variant="h6" gutterBottom>
+                          {`${round.data.name}`}:
+                        </Typography>
+                        <TextField
+                          required
+                          id="standard-required"
+                          label={"score"}
+                          onChange={e => {
+                            setScoresState({
+                              ...scoresState,
+                              [`${round.data.name}`]: e.target.value
+                            });
+                          }}
+                        />
+                      </div>
+                    ))}
+                    <br></br>
+                    <Button variant="contained" color="primary" type="submit">
+                      Log Score
+                    </Button>
+                  </MaterialUIForm>
+                )}
               </div>
             </InfoWindow>
           ) : null}

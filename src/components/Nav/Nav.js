@@ -29,21 +29,42 @@ export const Nav = ({ user, setUser, signOut }) => {
       <AppBar position="fixed">
         <Toolbar>
           <Link to="/" className={"nav__link"}>
-            <Typography id={"nav__logo"} variant="h5" className={classes.title}>
-              Dscore
-            </Typography>
+            <div className="flex items-center justify-center">
+              <img
+                className="mr-2"
+                src="app_icon.png"
+                alt="app icon"
+                width="50px"
+                height="50px"
+              ></img>
+              <Typography
+                id={"nav__logo"}
+                variant="h5"
+                className={classes.title}
+              >
+                Dscore
+              </Typography>
+            </div>
           </Link>
           <div className={"nav__links"}>
-            <Link
-              id={"nav__home-link"}
-              className={"nav__link"}
-              to="/current_game"
-            >
-              <span color="inherit">Current Game</span>
-            </Link>
-            <Link id={"nav__game-link"} className={"nav__link"} to="/new_game">
-              <span color="inherit">New Game</span>
-            </Link>
+            {loggedUser.user && loggedUser.user.id ? (
+              <>
+                <Link
+                  id={"nav__home-link"}
+                  className={"nav__link"}
+                  to="/current_game"
+                >
+                  <span color="inherit">Current Game</span>
+                </Link>
+                <Link
+                  id={"nav__game-link"}
+                  className={"nav__link"}
+                  to="/new_game"
+                >
+                  <span color="inherit">New Game</span>
+                </Link>
+              </>
+            ) : null}
             <Link
               id={"nav__leaderboard-link"}
               className={"nav__link"}

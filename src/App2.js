@@ -44,7 +44,7 @@ function App() {
     dispatch(getUser());
     dispatch(getHoles());
     dispatch(getAllRounds());
-    dispatch(getAllScores());
+    // dispatch(getAllScores());
   }, [game]);
 
   return (

@@ -48,6 +48,7 @@ export const CurrentGame = () => {
   const game = useSelector(state => state.getGame);
   const rounds = useSelector(state => state.getRounds);
   const scores = useSelector(state => state.getScoresFromRes);
+  const loggedUser = useSelector(state => state.getUser);
 
   const gameData = useSelector(state => state.getGameData);
   const [isInitialRender, setIsInitialRender] = useState(true);
@@ -92,7 +93,7 @@ export const CurrentGame = () => {
     const rowData = Object.keys(scoreData).map(name => {
       let data = {};
       data["Name"] = name;
-      data["Total"] = 0;
+      data["-"] = 0;
       let holeNumbers = [...Array(18)].map((number, index) => index + 1);
       holeNumbers.forEach(number => {
         let total = 0;
@@ -101,7 +102,7 @@ export const CurrentGame = () => {
         );
         if (targetScore.length > 0) {
           data[`Hole #${number}`] = targetScore[0].score;
-          data["total"] += parseInt(targetScore[0].score);
+          data["Total"] += parseInt(targetScore[0].score);
         } else {
           data[`Hole #${number}`] = null;
         }
@@ -110,81 +111,9 @@ export const CurrentGame = () => {
     });
     setRows(rowData);
   };
-  console.log(rows);
-
-  console.log("from current game scores: ", scores);
-  console.log("rounds", rounds);
-
-  // let all allScores = scores.map(score => {
-  //   let scoresData = {};
-  //   scoresData['name'] = score.name;
-  //   let holeNumbers = [...Array(18)].map((number, index) => index + 1);
-  //   holeNumbers.forEach(number => {
-
-  //   })
-  // })
-
-  //   let names = Object.keys(scores);
-  //   let allScores = names.map(name => {
-  //     let scoresData = {};
-  //     scoresData["name"] = name;
-  //     let holeNumbers = [...Array(18)].map((number, index) => index + 1);
-  //     holeNumbers.forEach(number => {
-  //       let targetScore = scores[name].filter(score => score.hole_id == number);
-  //       console.log(targetScore);
-  //       if (targetScore.length > 0) {
-  //         scoresData[`Hole #${number}`] = targetScore[0].score;
-  //       } else {
-  //         scoresData[`Hole #${number}`] = null;
-  //       }
-  //     });
-  //     return scoresData;
-  //   });
-  //   console.log(allScores);
-  // }
-
-  // console.log(columns);
-  // const columns = [
-  // 	{
-  // 		id: 'rank',
-  // 		label: 'Rank',
-  // 		minWidth: 170,
-  // 		align: 'center',
-  // 		format: (value) => value.toLocaleString()
-  // 	},
-  // 	{
-  // 		id: 'username',
-  // 		label: 'Username',
-  // 		minWidth: 100,
-  // 		align: 'center',
-  // 		format: (value) => value.toLocaleString()
-  // 	},
-  // 	{
-  // 		id: 'clicks',
-  // 		label: 'Clicks',
-  // 		minWidth: 170,
-  // 		align: 'center',
-  // 		format: (value) => value.toLocaleString()
-  // 	},
-  // 	{
-  // 		id: 'time',
-  // 		label: 'Time (seconds)',
-  // 		minWidth: 170,
-  // 		align: 'center',
-  // 		format: (value) => value.toLocaleString()
-  // 	},
-  // 	{
-  // 		id: 'score',
-  // 		label: 'Score',
-  // 		minWidth: 170,
-  // 		align: 'center',
-  // 		format: (value) => value.toFixed(0)
-  // 	}
-  // ];
 
   return (
     <div>
-      {/* {console.log(scores)} */}
       {rounds.length !== 0 ? (
         <>
           <h2>current game</h2>
@@ -244,6 +173,12 @@ export const CurrentGame = () => {
           </Paper>
         </>
       ) : (
+        // {Object.keys(loggedUser).length === 0 ?
+        //   (<Link to="/new_game">
+        //   <Button variant="contained" color="primary">
+        //     Create A Game
+        //   </Button>
+        // </Link>) :
         <Link to="/new_game">
           <Button variant="contained" color="primary">
             Create A Game

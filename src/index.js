@@ -8,19 +8,17 @@ import App from "./App2";
 import * as serviceWorker from "./serviceWorker";
 import allReducers from "./reducers";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 // connects store to entire app
 
 const initialState = {};
 const middleware = [thunk];
-
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   allReducers,
   initialState,
-  applyMiddleware(...middleware)
-  // allReducers,
-  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeEnhancers(applyMiddleware(...middleware))
 );
 
 ReactDOM.render(
