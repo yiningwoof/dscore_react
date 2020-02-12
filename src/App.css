@@ -1,55 +1,59 @@
 body {
-  font-family: rubik;
+	font-family: rubik;
 }
 
 .rounded {
-  border-radius: 0.25rem;
+	border-radius: 0.25rem;
 }
 
 .flex {
-  display: flex;
+	display: flex;
 }
 
 .flex-col {
-  flex-direction: column;
+	flex-direction: column;
 }
 
 .items-center {
-  align-items: center;
+	align-items: center;
 }
 
 .justify-center {
-  justify-content: center;
+	justify-content: center;
 }
 
 .justify-start {
-  justify-content: flex-start;
+	justify-content: flex-start;
 }
 
 .border {
-  border: solid 1px;
+	border: solid 1px;
 }
 
 .border-gray-400 {
-  border-color: #cbd5e0;
+	border-color: #cbd5e0;
 }
 
 .p-4 {
-  padding: 1rem;
+	padding: 1rem;
 }
 
 .mt-4 {
-  margin-top: 1rem;
+	margin-top: 1rem;
 }
 
 .w-full {
-  width: 100%;
+	width: 100%;
 }
 
 .w-1\/2 {
-  width: 50%;
+	width: 50%;
 }
 
 .mr-2 {
-  margin-right: 0.5rem;
+	margin-right: 0.5rem;
+}
+
+.error-msg {
+	color: red;
 }

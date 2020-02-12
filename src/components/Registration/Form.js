@@ -1,6 +1,7 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 
-export const SignUpForm = ({ errors, handleErrors, handleSubmit }) => (
+export const SignUpForm = ({ errorMsg, handleErrors, handleSubmit }) => (
 	<div className="form-container sign-up-container">
 		<form id={'sign-up__form'}>
 			<h1>Create Account</h1>
@@ -52,7 +53,7 @@ export const SignUpForm = ({ errors, handleErrors, handleSubmit }) => (
 	</div>
 );
 
-export const SignInForm = ({ errors, handleErrors, handleSubmit }) => (
+export const SignInForm = ({ error, handleErrors, handleSubmit }) => (
 	<div className="form-container sign-in-container">
 		<form id={'sign-in__form'}>
 			<h1>Sign in</h1>
@@ -62,12 +63,19 @@ export const SignInForm = ({ errors, handleErrors, handleSubmit }) => (
 				type="name"
 				placeholder="Email"
 			/>
+			{error.status === 404 ? (
+				<span className="error-msg">{error.msg}</span>
+			) : null}
 			<input
 				className="input"
 				data-colname={'password'}
 				type="password"
 				placeholder="Password"
 			/>
+			{error.status === 401 ? (
+				<span className="error-msg">{error.msg}</span>
+			) : null}
+			<br />
 			<button
 				onClick={(e) => {
 					e.preventDefault();

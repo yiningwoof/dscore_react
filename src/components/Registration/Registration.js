@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SignUpForm, SignInForm } from './Form';
 import { SignInOverlay } from './Overlay';
 import { useDispatch } from 'react-redux';
@@ -10,6 +10,7 @@ import './styles.css';
 
 export const Registration = (setUser) => {
 	const dispatch = useDispatch();
+	const [error, setError] = useState({});
 
 	const handleSubmit = async (formId) => {
 		const signUpAPI = `http://localhost:3000/api/v1/users`;
@@ -68,22 +69,32 @@ export const Registration = (setUser) => {
 			.post(APIUrl, { user: userObject }, { withCredentials: true })
 			//   .then(res => setUserState(res.data.user))
 			//   .then(console.log)
-			.then((res) => (res.data.logged_in ? dispatch(getUser()) : null));
+			.then((res) => {
+				console.log(res);
+				if (res.data.logged_in) {
+					dispatch(getUser());
+				}
+			})
+			.catch((error) => {
+				if (error.response.status === 404) {
+					setError({
+						status: 404,
+						msg: 'User account does not exist. Please create an account.'
+					});
+				}
+				if (error.response.status === 401) {
+					setError({
+						status: 401,
+						msg: 'Incorrect password. Please try again.'
+					});
+				}
+			});
 	};
-
 	return (
 		<div>
 			<div className="container" id="container">
-				<SignUpForm
-					//   errors={errors}
-					//   handleErrors={handleErrors}
-					handleSubmit={handleSubmit}
-				/>
-				<SignInForm
-					//   errors={errors}
-					//   handleErrors={handleErrors}
-					handleSubmit={handleSubmit}
-				/>
+				<SignUpForm error={error} handleSubmit={handleSubmit} />
+				<SignInForm error={error} handleSubmit={handleSubmit} />
 				<SignInOverlay />
 			</div>
 		</div>
