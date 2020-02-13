@@ -45,12 +45,13 @@ export const NewGame = (props) => {
 	const playerNames = useSelector((state) => state.getPlayerNames);
 	const loggedUser = useSelector((state) => state.getUser);
 	const game = useSelector((state) => state.getGame);
+	const holeScores = useSelector((state) => state.updateHoleScores);
 
 	const [labelWidth, setLabelWidth] = React.useState(0);
 
 	React.useEffect(() => {
-		console.log('game', game);
-		if (game.game_id) {
+		console.log('hole scores', holeScores);
+		if (game.game_id && Object.keys(holeScores).length !== 18) {
 			setOpen(true);
 		}
 	}, []);
@@ -69,7 +70,7 @@ export const NewGame = (props) => {
 	return (
 		<div className="flex w-full">
 			<div className="w-1/2 p-4 flex flex-col justify-start items-center">
-				<h2>Create a new game</h2>
+				<h2>Create a new game...</h2>
 				<FormControl className={classes.formControl}>
 					<InputLabel id="demo-simple-select-helper-label">
 						How Many Players
@@ -99,7 +100,14 @@ export const NewGame = (props) => {
 			<div className="w-1/2 p-4 flex flex-col justify-start items-center">
 				{numberPlayers === '' ? null : (
 					<div>
-						{numberPlayers === 0 ? null : <h2>Let's get player names!</h2>}
+						{numberPlayers === 0 ? (
+							<>
+								<br></br>
+								<br></br>
+							</>
+						) : (
+							<h2>Let's get player names...</h2>
+						)}
 						<MaterialUIForm onSubmit={handleCreateGame}>
 							{[...Array(numberPlayers)].map((player, index) => (
 								<TextField

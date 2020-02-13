@@ -60,7 +60,6 @@ export const CreateGameModal = ({ open, setOpen }) => {
 					</Link>
 				</DialogActions>
 			</Dialog>
-			;
 		</div>
 	);
 };

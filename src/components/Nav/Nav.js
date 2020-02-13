@@ -40,7 +40,7 @@ export const Nav = ({ user, setUser, signOut }) => {
 							height="50px"
 						></img>
 						<Typography id={'nav__logo'} variant="h5" className={classes.title}>
-							DScore
+							Discore
 						</Typography>
 					</div>
 				</Link>

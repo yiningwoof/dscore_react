@@ -48,7 +48,7 @@ export const Registration = (setUser) => {
 				if (error.response.status === 401) {
 					setError({
 						status: 1,
-						msg: 'Email already exists. Please log in or choose another email.'
+						msg: 'Email already exists. Please sign in or choose another email.'
 					});
 				} else if (error.response.status === 400) {
 					setError({

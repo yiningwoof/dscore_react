@@ -44,6 +44,7 @@ body {
 
 .p-4 {
 	padding: 1rem;
+	text-align: center;
 }
 
 .mt-4 {
@@ -85,4 +86,12 @@ body {
 
 .absolute {
 	position: absolute;
+}
+
+#title {
+	text-transform: uppercase;
+}
+
+#outline {
+	outline: none;
 }

@@ -148,7 +148,6 @@ export const CurrentGame = () => {
 													tabIndex={-1}
 													key={row.code}
 												>
-													{/* <TableCell>{index + 1}</TableCell> */}
 													{columns.map((column) => {
 														const value = row[column.id];
 														return (

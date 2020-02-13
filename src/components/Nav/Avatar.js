@@ -5,7 +5,13 @@ import { getUser } from '../../actions';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-import { deepOrange, deepPurple } from '@material-ui/core/colors';
+import {
+	deepOrange,
+	deepPurple,
+	yellow,
+	cyan,
+	lightGreen
+} from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -21,6 +27,18 @@ const useStyles = makeStyles((theme) => ({
 	purple: {
 		color: theme.palette.getContrastText(deepPurple[500]),
 		backgroundColor: deepPurple[500]
+	},
+	yellow: {
+		color: theme.palette.getContrastText(yellow[500]),
+		backgroundColor: yellow[500]
+	},
+	cyan: {
+		color: theme.palette.getContrastText(cyan[200]),
+		backgroundColor: cyan[200]
+	},
+	lightGreen: {
+		color: theme.palette.getContrastText(lightGreen[200]),
+		backgroundColor: lightGreen[200]
 	}
 }));
 
@@ -31,7 +49,7 @@ export const LetterAvatar = () => {
 	console.log(loggedUser.user);
 	return (
 		<div className={classes.root}>
-			<Avatar className={classes.purple}>
+			<Avatar className={classes.yellow}>
 				{loggedUser.user.firstname[0].toUpperCase()}
 			</Avatar>
 		</div>

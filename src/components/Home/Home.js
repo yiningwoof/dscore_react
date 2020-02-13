@@ -65,7 +65,7 @@ export const Home = () => {
 	};
 
 	useEffect(() => {
-		if (Object.keys(holeScores).length === 2) {
+		if (Object.keys(holeScores).length === 18) {
 			handleClickOpen();
 		}
 	}, [holeScores]);
@@ -75,7 +75,6 @@ export const Home = () => {
 		const [scoresState, setScoresState] = useState({});
 
 		const createScores = (selectedHole) => {
-			console.log(holeScores);
 			if (!loggedUser.user) {
 				history.push('/registration');
 			} else if (Object.keys(rounds).length === 0) {
@@ -123,7 +122,7 @@ export const Home = () => {
 					{selectedHole ? (
 						<InfoWindow
 							position={{
-								lat: parseFloat(selectedHole.lat),
+								lat: parseFloat(selectedHole.lat + 0.00035),
 								lng: parseFloat(selectedHole.lng)
 							}}
 							onCloseClick={() => {
@@ -132,13 +131,17 @@ export const Home = () => {
 						>
 							<div class="p-4">
 								{/* <h3>{`Hole #${selectedHole.id}`}</h3> */}
-								<Typography variant="h4" gutterBottom>
-									{`Hole #${selectedHole.id}`}
+								<Typography id="title" variant="h4" gutterBottom>
+									{`Hole ${selectedHole.id}`}
 								</Typography>
+								{/* <hr className="mt-4 border-gray-400" /> */}
+
 								<Typography variant="h6" gutterBottom>
-									Par: {selectedHole.par}
+									Par {selectedHole.par}
 								</Typography>
-								<br />
+								<br></br>
+								<hr className="mt-4 border-gray-400" />
+								<br></br>
 								<img
 									className="rounded"
 									src={selectedHole.pic}

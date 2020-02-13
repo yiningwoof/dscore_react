@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
+import ButtonBase from '@material-ui/core/ButtonBase';
 
 // import ListItemIcon from '@material-ui/core/ListItemIcon';
 // import ListItemText from '@material-ui/core/ListItemText';
@@ -67,7 +68,9 @@ export const LoginStatusIcon = ({ signOut }) => {
 	return (
 		<div style={{ display: 'inline-block' }}>
 			<div onClick={handleClick}>
+				{/* <ButtonBase> */}
 				<LetterAvatar></LetterAvatar>
+				{/* </ButtonBase> */}
 			</div>
 			{/* <Button
 				aria-controls="customized-menu"
