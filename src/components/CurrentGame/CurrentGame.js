@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -11,6 +12,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+
+import { CreateGameModal } from './CreateGameModal';
 
 // import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
@@ -58,7 +61,13 @@ export const CurrentGame = () => {
 	const [rowsPerPage, setRowsPerPage] = React.useState(10);
 	const [rows, setRows] = React.useState([]);
 
+	const [open, setOpen] = React.useState(false);
+
 	useEffect(() => {
+		console.log(rounds);
+		if (rounds.length === 0) {
+			setOpen(true);
+		}
 		setUpRows();
 	}, []);
 
@@ -101,7 +110,6 @@ export const CurrentGame = () => {
 					data[`Hole #${number}`] = null;
 				}
 			});
-			console.log(data);
 			return data;
 		});
 		setRows(rowData);
@@ -109,6 +117,7 @@ export const CurrentGame = () => {
 
 	return (
 		<div>
+			<CreateGameModal open={open} setOpen={setOpen}></CreateGameModal>
 			{rounds.length !== 0 ? (
 				<>
 					<h2>current game</h2>
@@ -167,19 +176,20 @@ export const CurrentGame = () => {
 						/>
 					</Paper>
 				</>
-			) : (
-				// {Object.keys(loggedUser).length === 0 ?
-				//   (<Link to="/new_game">
-				//   <Button variant="contained" color="primary">
-				//     Create A Game
-				//   </Button>
-				// </Link>) :
-				<Link to="/new_game">
-					<Button variant="contained" color="primary">
-						Create A Game
-					</Button>
-				</Link>
-			)}
+			) : null
+			// <div className={'flex justify-center items-center'}>
+			// 	<Typography variant="h5" gutterBottom>
+			// 		Seems like you don't have a game yet. Create one first!
+			// 	</Typography>
+			// 	<br></br>
+			// 	<br></br>
+			// 	<Link to="/new_game">
+			// 		<Button variant="contained" color="primary">
+			// 			Create A Game
+			// 		</Button>
+			// 	</Link>
+			// </div>
+			}
 		</div>
 	);
 };
