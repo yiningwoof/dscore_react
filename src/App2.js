@@ -13,6 +13,7 @@ import {
 // import { connect } from "react-redux";
 import axios from "axios";
 
+import "./tailwind.o.css";
 import "./App.css";
 
 import { Nav } from "./components/Nav/Nav";
